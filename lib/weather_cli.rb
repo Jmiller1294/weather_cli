@@ -1,3 +1,9 @@
+require 'open-uri'
+require 'nokogiri'
+require 'colorize'
+require 'pry'
+require 'httparty'
+
 require_relative './weather_cli/version'
 require_relative './weather_cli/cli'
 require_relative './weather_cli/forecast'

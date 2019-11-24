@@ -1,5 +1,5 @@
-module WeatherCli
-class Forecast
+class WeatherCli::CLI
+
   
   require 'pry'
   attr_accessor :date
@@ -15,5 +15,4 @@ class Forecast
     @@all
   end
   
-  binding.pry
 end

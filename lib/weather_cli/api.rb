@@ -4,8 +4,8 @@
 require 'httparty'
 require 'pry'
 
-module WeatherCli
-  class API
+class WeatherCli::API
+  
   ROOT_URL = 'https://www.metaweather.com/api/location/'
 
   def self.get_woeid(user_city)
