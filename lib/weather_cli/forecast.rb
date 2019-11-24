@@ -1,5 +1,7 @@
-class WeatherCli::Forecast
+module WeatherCli
+class Forecast
   
+  require 'pry'
   attr_accessor :date
   
   @@all = []
@@ -12,4 +14,6 @@ class WeatherCli::Forecast
   def self.all
     @@all
   end
+  
+  binding.pry
 end

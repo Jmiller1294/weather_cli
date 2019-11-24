@@ -1,10 +1,10 @@
 
-
-class WeatherCli::CLI
+  class CLI
   
   def call 
+    Weather::API.new.get_weather
     puts "Would you like to know the weather?"
-  
+    location
   end
   
   def location

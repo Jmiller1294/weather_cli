@@ -4,8 +4,8 @@
 require 'httparty'
 require 'pry'
 
-
-class WeatherCli::API
+module WeatherCli
+  class API
   ROOT_URL = 'https://www.metaweather.com/api/location/'
 
   def self.get_woeid(user_city)
@@ -23,7 +23,6 @@ class WeatherCli::API
  
   def self.create_from_array(response)
     self.response.each do |forecast|
-      forecast = Forecast.new
       forecast.date = forecast[0]["applicable_date"]
      
   end
@@ -43,6 +42,7 @@ class WeatherCli::API
   end
 
 end
+ 
 
 
 
