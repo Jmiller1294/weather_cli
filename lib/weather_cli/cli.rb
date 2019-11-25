@@ -7,29 +7,34 @@
   def call 
    location 
    get_weather(name)
-   get_date
-   get_weather_state
+   #get_date
+   #get_weather_state
+   goodbye
   end
   
 
   
   
   def get_weather(name)
-    puts "Where would you like to see the forecast?"
+    puts "Type in a city to get its 5 day forecast"
     name = gets
     WeatherCli::API.get_woeid(name)
-  end
-  
-  def get_date 
-  WeatherCli::Forecast.all.each do |weather|
-    puts weather.date
+    WeatherCli::Forecast.all.each do |weather|
+    puts "\n The weather for #{name} on #{weather.date} is #{weather.weather_state_name}"
    end
   end
   
+  # def get_date
+  # WeatherCli::Forecast.all.each do |weather|
+  #   puts "The weather for #{weather.date} is"
+  #   puts weather.weather_state_name
+  # end
+  # end
+  
   def get_weather_state
-    WeatherCli::Forecast.all.each do |weather|
-      puts weather.weather_state_name
-    end
+    #WeatherCli::Forecast.all.each do |weather|
+      #puts weather.weather_state_name
+    #end
    
   end 
     
@@ -49,6 +54,6 @@
   
   
   def goodbye
-   puts  "See you next time for more weather updates, Goodbye!"
+   puts  "\nSee you next time for more weather updates, Goodbye!"
   end
 end
