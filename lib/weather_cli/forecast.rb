@@ -2,12 +2,12 @@ class WeatherCli::Forecast
 
   
   require 'pry'
-  attr_accessor :date, :type
+  attr_accessor :id, :date, :weather_state_name ,:current_temp :min_temp, :max_temp,:wind_speed, :humidity 
   
   @@all = []
   
-  def initialize
-    
+  def initialize(args ={})
+    @date = date
     @@all << self
   end
   

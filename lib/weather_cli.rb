@@ -1,5 +1,4 @@
 require 'json'
-require 'rest-client'
 require 'colorize'
 require 'pry'
 require 'httparty'

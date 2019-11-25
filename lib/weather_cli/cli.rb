@@ -32,7 +32,7 @@
           end
         end
       end
-  end
+  
   
   def goodbye
    puts  "See you next time for more weather updates, Goodbye!"
