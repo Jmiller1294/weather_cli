@@ -22,12 +22,13 @@ class WeatherCli::API
  
  
   def self.create_from_array(response)
-    self.response.each do |forecast|
-      forecast.date = forecast[0]["applicable_date"]
+    self.get_forecast_for_city.each do |forecast|
+      Forecast.type = forcast["consolidated weather"][0]["weather_state_name"]
+    end
      
   end
        
-  end
+  
   
 
   def self.get_forecast_for_city(site_id)
@@ -41,6 +42,9 @@ class WeatherCli::API
     # make self.create_from_array (response)
   end
 
+def self.hello
+  puts "Hello"
+end
 end
  
 

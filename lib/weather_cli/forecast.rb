@@ -1,13 +1,13 @@
-class WeatherCli::CLI
+class WeatherCli::Forecast
 
   
   require 'pry'
-  attr_accessor :date
+  attr_accessor :date, :type
   
   @@all = []
   
   def initialize
-   
+    
     @@all << self
   end
   
@@ -15,4 +15,7 @@ class WeatherCli::CLI
     @@all
   end
   
+  def self.type
+    puts "hi"
+  end
 end
