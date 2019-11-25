@@ -2,7 +2,7 @@ class WeatherCli::Forecast
 
   
   require 'pry'
-  attr_accessor :id, :date, :weather_state_name ,:current_temp :min_temp, :max_temp,:wind_speed, :humidity 
+  attr_accessor :id, :date, :weather_state_name ,:current_temp , :min_temp, :max_temp,:wind_speed, :humidity 
   
   @@all = []
   
