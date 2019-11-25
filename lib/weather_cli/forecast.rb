@@ -6,7 +6,8 @@ class WeatherCli::Forecast
   
   @@all = []
   
-  def initialize(args ={})
+  def initialize(weather_state_name,date)
+    @weather_state_name = weather_state_name
     @date = date
     @@all << self
   end
@@ -15,7 +16,5 @@ class WeatherCli::Forecast
     @@all
   end
   
-  def self.type
-    puts "hi"
-  end
+ 
 end

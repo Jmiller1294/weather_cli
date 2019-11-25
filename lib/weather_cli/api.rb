@@ -25,6 +25,7 @@ class WeatherCli::API
     response["consolidated_weather"].each do |weather|
       weather_state_name = weather["weather_state_name"]
       date = weather["applicable_date"]
+      WeatherCli::Forecast.new(weather_state_name,date)
     end
     
      
