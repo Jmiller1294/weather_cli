@@ -1,9 +1,22 @@
 
   class WeatherCli::CLI
   
+  attr_accessor :name
+  
+  
   def call 
    location 
-   puts WeatherCli::API.get_woeid("New York")
+   get_weather(name)
+  end
+  
+
+  
+  
+  def get_weather(name)
+    puts "Where would you like to see the forecast?"
+    name = gets
+   puts WeatherCli::API.get_woeid(name)
+   
   end
   
   def location
@@ -14,18 +27,11 @@
     input = gets
       if input == 'y'|| input == 'Y'|| input == "yes"|| input == "Yes"
         while input != "exit"
-            puts "Enter the location of where you would like to know the weather"
-            input = gets.strip
-          case input
-            when "New York"
-              puts "78 degrees"
-            when "Chicago"
-              puts "53 degrees"
+            
+          
           end
         end
-      else
-    goodbye
-   end
+      end
   end
   
   def goodbye
