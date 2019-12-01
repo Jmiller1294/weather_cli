@@ -25,15 +25,16 @@ class WeatherCli::API
     response["consolidated_weather"].each do |weather|
       weather_state_name = weather["weather_state_name"]
       date = weather["applicable_date"]
-      WeatherCli::Forecast.new(weather_state_name,date)
+      current_temp = weather["the_temp"]
+      max_temp = weather["max_temp"]
+      min_temp = weather["min_temp"]
+      wind_speed = weather["wind_speed"]
+      humidity = weather["humidity"]
+      WeatherCli::Forecast.new(weather_state_name,date,current_temp,max_temp,min_temp,wind_speed,humidity)
     end
-    
-     
   end
        
   
-  
-
   def self.get_forecast_for_city(site_id)
     # sample url: https://www.metaweather.com/api/location/2379574/
     response = HTTParty.get(ROOT_URL + site_id.to_s)

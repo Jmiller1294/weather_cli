@@ -1,5 +1,4 @@
 require 'json'
-require 'colorize'
 require 'pry'
 require 'httparty'
 

@@ -18,10 +18,10 @@
   def get_weather(name)
     puts "Type in a city to get its 5 day forecast"
     name = gets
-    WeatherCli::API.get_woeid(name)
-    WeatherCli::Forecast.all.each do |weather|
-    puts "\n The weather for #{name} on #{weather.date} is #{weather.weather_state_name}"
-   end
+    puts WeatherCli::API.get_woeid(name)
+    # WeatherCli::Forecast.all.each do |weather|
+    # puts "\n The weather for #{name} on #{weather.date} is #{weather.weather_state_name}"
+   #end
   end
   
   # def get_date

@@ -9,6 +9,7 @@ class WeatherCli::Forecast
   def initialize(weather_state_name,date)
     @weather_state_name = weather_state_name
     @date = date
+    
     @@all << self
   end
   
