@@ -6,7 +6,7 @@ class WeatherCli::CLI
   #method used to start the program
   def call 
    puts "---------------------------------------"
-   puts " Hello Welcome to the City Weather App "
+   puts " Hello, Welcome to the City Weather App "
    puts "---------------------------------------"
    print_weather
   end
@@ -26,7 +26,7 @@ class WeatherCli::CLI
       
       #Prints the variables from the Forecast class
       puts ""
-      puts "The weather for #{name.upcase}on #{weather.date} is "
+      puts "The weather for #{name.upcase}on #{weather.date} is: "
       puts "-----------------------------------------------------"
       puts "Weather Type:           #{weather.weather_state_name}"       
       puts "Current Temperature:    #{((weather.current_temp * 9/5) + 32).round()} °F"
