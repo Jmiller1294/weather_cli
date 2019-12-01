@@ -6,10 +6,14 @@ class WeatherCli::Forecast
   
   @@all = []
   
-  def initialize(weather_state_name,date)
-    @weather_state_name = weather_state_name
+  def initialize(date ,weather_state_name, current_temp, min_temp, max_temp, wind_speed, humidity)
     @date = date
-    
+    @weather_state_name = weather_state_name
+    @current_temp = current_temp
+    @min_temp = min_temp
+    @max_temp = max_temp
+    @wind_speed = wind_speed
+    @humidity = humidity
     @@all << self
   end
   
@@ -17,5 +21,4 @@ class WeatherCli::Forecast
     @@all
   end
   
- 
 end
