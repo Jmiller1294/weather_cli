@@ -5,19 +5,19 @@
   
   
   def call 
-    print_weather
+   puts "---------------------------------------"
+   puts " Hello Welcome to the City Weather App "
+   puts "---------------------------------------"
+   print_weather
    
+    
   end
   
   
   def print_weather
-    # input = nil 
     
-    # puts "Would you like to know the weather?"
-    # input = gets
-    #   if input == 'y'|| input == 'Y'|| input == "yes"|| input == "Yes"
     
-    puts "Type in a city to get its 5 day forecast"
+    puts "Type in a city to get its 5 day forecast:"
     name = gets
     
     WeatherCli::API.get_woeid(name)
@@ -35,19 +35,19 @@
       puts "-----------------------------------------------------"
    end
    
-  #   else
-  #     goodbye
-  # end
-end
-  
-  
-  
-  
-    
- 
-  
-  
-  def goodbye
-   puts  "\nSee you next time for more weather updates, Goodbye!"
+   puts "Would you like to get the 5 day forecast for another city?"
+    input = gets.strip.downcase
+    if input == 'y' || input == "yes"
+      print_weather
+    elsif input == "n" || input == "no"
+      puts ""
+      puts  "See you next time for more weather updates, Goodbye!"
+      exit
+    else
+      puts ""
+      puts "Invalid answer Enter Yes or No."
+      print_weather
+    end
   end
+  
 end
