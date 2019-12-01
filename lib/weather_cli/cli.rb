@@ -29,9 +29,9 @@ class WeatherCli::CLI
       puts "The weather for #{name.upcase}on #{weather.date} is: "
       puts "-----------------------------------------------------"
       puts "Weather Type:           #{weather.weather_state_name}"       
-      puts "Current Temperature:    #{((weather.current_temp * 9/5) + 32).round()} °F"
-      puts "Minimun Temperature:    #{((weather.min_temp * 9/5) + 32).round()} °F"
-      puts "Maximum Temperature:    #{((weather.max_temp * 9/5) + 32).round()} °F"
+      puts "Current Temperature:    #{((weather.current_temp*9/5) + 32).round()} °F"
+      puts "Maximun Temperature:    #{((weather.max_temp * 9/5) + 32).round()} °F"
+      puts "Minimum Temperature:    #{((weather.min_temp * 9/5) + 32).round()} °F"
       puts "Wind Speed:             #{weather.wind_speed.round(1)} mph"
       puts "Humidity:               #{weather.humidity}%"
       puts "-----------------------------------------------------"
@@ -41,6 +41,7 @@ class WeatherCli::CLI
    puts "Would you like to get the 5 day forecast for another city?"
     input = gets.strip.downcase
     if input == 'y' || input == "yes"
+      WeatherCli::Forecast.clear_all
       print_weather
     elsif input == "n" || input == "no"
       puts ""
@@ -48,7 +49,8 @@ class WeatherCli::CLI
       exit
     else
       puts ""
-      puts "Invalid answer Enter Yes or No."
+      puts "Invalid answer. Enter Yes or No."
+      WeatherCli::Forecast.clear_all
       print_weather
     end
   end
