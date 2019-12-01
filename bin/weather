@@ -2,5 +2,4 @@
 
 require "./lib/weather_cli"
 
-
 WeatherCli::CLI.new.call

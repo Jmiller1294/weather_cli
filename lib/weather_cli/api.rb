@@ -15,13 +15,13 @@ class WeatherCli::API
     response = HTTParty.get(ROOT_URL + "search/?query=#{user_city}")
     # resp = HTTParty.get("https://www.metaweather.com/api/location/search/?query=#{user_city}")
     
-
     # response[0]['woeid'] #=> returns 2379574, from hash "woeid"=>2379574"
     self.get_forecast_for_city(response[0]['woeid'])
   end
  
  
   def self.create_from_array(response)
+    #Creates an array form hash response 
     response["consolidated_weather"].each do |weather|
       date = weather["applicable_date"]
       weather_state_name = weather["weather_state_name"]
@@ -30,6 +30,7 @@ class WeatherCli::API
       min_temp = weather["min_temp"]
       wind_speed = weather["wind_speed"]
       humidity = weather["humidity"]
+      #Creates a new WeatherCli::Forecast object 
       WeatherCli::Forecast.new(date,weather_state_name,current_temp,max_temp,min_temp,wind_speed,humidity)
     end
   end
@@ -38,12 +39,9 @@ class WeatherCli::API
   def self.get_forecast_for_city(site_id)
     # sample url: https://www.metaweather.com/api/location/2379574/
     response = HTTParty.get(ROOT_URL + site_id.to_s)
-    
     # resp = HTTParty.get("https://www.metaweather.com/api/location/#{site_id}")
 
-    # next steps
-    # build forecast class
-    # make self.create_from_array (response)
+    #uses the class method create_from_array 
     self.create_from_array(response)
   end
 
