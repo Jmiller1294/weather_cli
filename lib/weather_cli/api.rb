@@ -23,14 +23,14 @@ class WeatherCli::API
  
   def self.create_from_array(response)
     response["consolidated_weather"].each do |weather|
-      weather_state_name = weather["weather_state_name"]
       date = weather["applicable_date"]
+      weather_state_name = weather["weather_state_name"]
       current_temp = weather["the_temp"]
       max_temp = weather["max_temp"]
       min_temp = weather["min_temp"]
       wind_speed = weather["wind_speed"]
       humidity = weather["humidity"]
-      WeatherCli::Forecast.new(weather_state_name,date,current_temp,max_temp,min_temp,wind_speed,humidity)
+      WeatherCli::Forecast.new(date,weather_state_name,current_temp,max_temp,min_temp,wind_speed,humidity)
     end
   end
        
