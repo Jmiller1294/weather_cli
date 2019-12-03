@@ -24,6 +24,10 @@ class WeatherCli::Forecast
     @@all
   end
   
+  def self.find(id)
+    self.all[id-1]
+  end
+  
   def self.clear_all
     @@all.clear
   end
