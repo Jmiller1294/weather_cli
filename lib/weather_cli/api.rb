@@ -1,23 +1,38 @@
 # beer API docs: https://www.metaweather.com/api/#location
 
-
 require 'httparty'
 require 'pry'
 
+
+
+
 class WeatherCli::API
+  attr_accessor :no_response
+  
+ 
+  
+  
+  
   
   ROOT_URL = 'https://www.metaweather.com/api/location/'
-
   def self.get_woeid(user_city)
     #sample url: https://www.metaweather.com/api/location/search/?query=chicago
-    
     # get the site woeid ID to pull 5 day forecate for the city
     response = HTTParty.get(ROOT_URL + "search/?query=#{user_city}")
     # resp = HTTParty.get("https://www.metaweather.com/api/location/search/?query=#{user_city}")
-    
     # response[0]['woeid'] #=> returns 2379574, from hash "woeid"=>2379574"
-    self.get_forecast_for_city(response[0]['woeid'])
+    @@no_response = false
+    if response.empty?
+      @@no_response = true
+    else
+      self.get_forecast_for_city(response[0]['woeid'])
+    end
   end
+  
+def self.no_response
+    @@no_response 
+  end
+
  
  
   def self.create_from_array(response)

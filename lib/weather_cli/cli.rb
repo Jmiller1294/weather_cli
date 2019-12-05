@@ -11,29 +11,26 @@ class WeatherCli::CLI
    start
   end
   
+  def check_response
   
-  def start
-    
-    #gets input from the user
-    puts "Type in a city to get its 6 day forecast:"
-    
-    @name = gets
-    
-    # Uses the API class method get_woeid and passes the users input as an arguement
-    WeatherCli::API.get_woeid(@name)
-   
+  if WeatherCli::API.no_response == true
+      puts "Sorry the app cant find that city"
+      start
+    else
     puts ""
     print_weather
     puts ""
     puts "type in 1-6 to get more information on that day "
     input = gets.strip
-
     day = WeatherCli::Forecast.find(input.to_i)
-    
     print_weather_day(day)
-   
-    #Ask the user if the would like to start the program over again
-    puts "Would you like to see the weather for another day? "
+   end
+  
+end
+  
+  
+def repeat
+ puts "Would you like to search for another city? "
     input = gets.strip.downcase
       if input == 'y' || input == "yes"
         WeatherCli::Forecast.clear_all
@@ -46,8 +43,23 @@ class WeatherCli::CLI
         puts ""
         puts "Invalid answer. Enter Yes or No."
         WeatherCli::Forecast.clear_all
-        start
-      end
+        repeat
+      end 
+  end
+  
+  
+  
+  #method used to start the program
+  def start
+    #gets input from the user
+    puts "Type in a city to get its 6 day forecast:"
+    @name = gets
+    # Uses the API class method get_woeid and passes the users input as an arguement
+    WeatherCli::API.get_woeid(@name)
+    check_response
+    #Ask the user if the would like to start the program over again
+    #create seperate method
+    repeat
   end
   
   
