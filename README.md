@@ -1,20 +1,21 @@
 # WeatherCli
-
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/weather_cli`. To experiment with that code, run `bin/console` for an interactive prompt.
+This program uses an api to get weather data from a website.The program propmts the user to type in a major city name and gives the user a list of 6 days. The the user then chooses one of the six days to get a detailed weather report.
 
 TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
 Add this line to your application's Gemfile:
-
-```ruby
 gem 'weather_cli'
-```
+
+To install this file you need to clone this link git@github.com:Jmiller1294/weather_cli.git from github and the intall the httparty gem and the pry gem.
+
 
 And then execute:
 
-    $ bundle
+$ bundle
+
+    To execute the program change to the weather_cli file in the Development folder using cd weather_cli.Then type bin/weather to execute the program.you can also type in bin/console to bring up the irb.
 
 Or install it yourself as:
 
