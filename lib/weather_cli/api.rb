@@ -1,26 +1,20 @@
-# beer API docs: https://www.metaweather.com/api/#location
-
-require 'httparty'
-require 'pry'
-
-
-
-
 class WeatherCli::API
+  
   attr_accessor :no_response
   
- 
-  
-  
-  
-  
   ROOT_URL = 'https://www.metaweather.com/api/location/'
+  
+  def self.no_response
+    @@no_response 
+  end
+  
   def self.get_woeid(user_city)
     #sample url: https://www.metaweather.com/api/location/search/?query=chicago
     # get the site woeid ID to pull 5 day forecate for the city
     response = HTTParty.get(ROOT_URL + "search/?query=#{user_city}")
     # resp = HTTParty.get("https://www.metaweather.com/api/location/search/?query=#{user_city}")
     # response[0]['woeid'] #=> returns 2379574, from hash "woeid"=>2379574"
+    
     @@no_response = false
     if response.empty?
       @@no_response = true
@@ -29,12 +23,7 @@ class WeatherCli::API
     end
   end
   
-def self.no_response
-    @@no_response 
-  end
-
- 
- 
+  
   def self.create_from_array(response)
     #Creates an array form hash response 
     response["consolidated_weather"].each do |weather|
@@ -46,7 +35,7 @@ def self.no_response
       wind_speed = weather["wind_speed"]
       humidity = weather["humidity"]
       #Creates a new WeatherCli::Forecast object 
-      WeatherCli::Forecast.new(date,weather_state_name,current_temp,max_temp,min_temp,wind_speed,humidity)
+      WeatherCli::Forecast.new(date, weather_state_name, current_temp, max_temp, min_temp, wind_speed, humidity)
     end
   end
        
@@ -59,7 +48,6 @@ def self.no_response
     #uses the class method create_from_array 
     self.create_from_array(response)
   end
-
 
 end
  

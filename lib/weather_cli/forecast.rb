@@ -1,7 +1,7 @@
 class WeatherCli::Forecast
 
-  
   require 'pry'
+  
   #creates setter and getter methods
   attr_accessor :id, :date, :weather_state_name ,:current_temp , :min_temp, :max_temp,:wind_speed, :humidity 
   
@@ -31,4 +31,5 @@ class WeatherCli::Forecast
   def self.clear_all
     @@all.clear
   end
+
 end
