@@ -1,11 +1,15 @@
 class WeatherCli::API
   
-  attr_accessor :no_response
+  attr_accessor :no_response , :name
   
   ROOT_URL = 'https://www.metaweather.com/api/location/'
   
   def self.no_response
     @@no_response 
+  end
+  
+  def self.name
+    @@name
   end
   
   def self.get_woeid(user_city)
@@ -14,6 +18,7 @@ class WeatherCli::API
     response = HTTParty.get(ROOT_URL + "search/?query=#{user_city}")
     # resp = HTTParty.get("https://www.metaweather.com/api/location/search/?query=#{user_city}")
     # response[0]['woeid'] #=> returns 2379574, from hash "woeid"=>2379574"
+    @@name = response[0]['title']
     
     @@no_response = false
     if response.empty?
@@ -34,8 +39,9 @@ class WeatherCli::API
       min_temp = weather["min_temp"]
       wind_speed = weather["wind_speed"]
       humidity = weather["humidity"]
+      name = @@name
       #Creates a new WeatherCli::Forecast object 
-      WeatherCli::Forecast.new(date, weather_state_name, current_temp, max_temp, min_temp, wind_speed, humidity)
+      WeatherCli::Forecast.new(name, date, weather_state_name, current_temp, max_temp, min_temp, wind_speed, humidity)
     end
   end
        

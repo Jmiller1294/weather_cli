@@ -14,18 +14,38 @@ class WeatherCli::CLI
   def start
     #gets input from the user
     puts "Type in a city to get its 6 day forecast:"
-    @name = gets.strip
+    name = gets.strip
     
-    if @name == "exit"
+    if name == "exit"
       exit
     else
     # Uses the API class method get_woeid and passes the users input as an arguement
-      WeatherCli::API.get_woeid(@name)
+      WeatherCli::API.get_woeid(name)
       check_response
-       more_info
-      repeat
+      more_info
+      puts "Would you like to search for another city? "
+      input = gets.strip.downcase
+    while input != "exit"
+    if input == "exit"
+      exit
+    else
+      if input == 'y' || input == "yes"
+        WeatherCli::Forecast.clear_all
+        start
+      elsif input == "n" || input == "no"
+        puts ""
+        puts  "See you next time for more weather updates, Goodbye!"
+        exit
+      else
+        puts ""
+        puts "Invalid answer. Enter Yes or No."
+        WeatherCli::Forecast.clear_all
+        
+      end 
+    end
     end
   end
+end
   
   
   def check_response
@@ -57,27 +77,7 @@ class WeatherCli::CLI
   end
   
   
-  def repeat
-    puts "Would you like to search for another city? "
-    input = gets.strip.downcase
-    if input == "exit"
-      exit
-    else
-      if input == 'y' || input == "yes"
-        WeatherCli::Forecast.clear_all
-        start
-      elsif input == "n" || input == "no"
-        puts ""
-        puts  "See you next time for more weather updates, Goodbye!"
-        exit
-      else
-        puts ""
-        puts "Invalid answer. Enter Yes or No."
-        WeatherCli::Forecast.clear_all
-        repeat
-      end 
-    end
-  end
+
   
   
   def print_weather
@@ -90,7 +90,7 @@ class WeatherCli::CLI
   def print_weather_day(day)
     #Prints the variables from the Forecast class
     puts ""
-    puts "The weather for #{@name.upcase} on #{day.date} is: "
+    puts "The weather for #{day.name.upcase} on #{day.date} is: "
     puts "-----------------------------------------------------"
     puts "Weather Type:           #{day.weather_state_name}"       
     puts "Current Temperature:    #{((day.current_temp*9/5) + 32).round()} °F"
