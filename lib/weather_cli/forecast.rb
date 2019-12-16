@@ -33,4 +33,19 @@ class WeatherCli::Forecast
     @@all.clear
   end
 
+  def self.find_by_city_name(name)
+    @@all.select do |weather|
+      weather if weather.name == name
+    end
+  end
+  
+  
+  def self find_or_create_by_city_name(user_input)
+    array = self.find_by_city_name(user_input)
+    if array.empty?
+    WeatherCli::API.get_woeid(input)
+    else
+      array
+    end
+  end
 end

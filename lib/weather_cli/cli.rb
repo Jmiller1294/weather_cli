@@ -20,7 +20,7 @@ class WeatherCli::CLI
       exit
     else
     # Uses the API class method get_woeid and passes the users input as an arguement
-      WeatherCli::API.get_woeid(name)
+      
       check_response
       more_info
       puts "Would you like to search for another city? "
@@ -30,7 +30,7 @@ class WeatherCli::CLI
       exit
     else
       if input == 'y' || input == "yes"
-        WeatherCli::Forecast.clear_all
+        
         start
       elsif input == "n" || input == "no"
         puts ""
@@ -39,7 +39,7 @@ class WeatherCli::CLI
       else
         puts ""
         puts "Invalid answer. Enter Yes or No."
-        WeatherCli::Forecast.clear_all
+       
         
       end 
     end
