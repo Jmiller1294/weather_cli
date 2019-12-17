@@ -6,7 +6,7 @@ class WeatherCli::Forecast
   attr_accessor :id, :name , :date, :weather_state_name ,:current_temp , :min_temp, :max_temp,:wind_speed, :humidity 
   
   @@all = []
-  
+  @@array = []
   #instantiates each object with the following attributes
   def initialize(name, date ,weather_state_name, current_temp, max_temp, min_temp, wind_speed, humidity)
     @name = name
@@ -25,6 +25,10 @@ class WeatherCli::Forecast
     @@all
   end
   
+  def self.array
+    @@array
+  end 
+  
   def self.find(id)
     self.all[id-1]
   end
@@ -35,17 +39,21 @@ class WeatherCli::Forecast
 
   def self.find_by_city_name(name)
     @@all.select do |weather|
-      weather if weather.name == name
-    end
+     if weather.name == name
+      weather
+     end
+     @@all
+  end
   end
   
   
-  def self find_or_create_by_city_name(user_input)
-    array = self.find_by_city_name(user_input)
-    if array.empty?
-    WeatherCli::API.get_woeid(input)
+  def self.find_or_create_by_city_name(user_input)
+    @@array = self.find_by_city_name(user_input)
+    if @@array.empty?
+    WeatherCli::API.get_woeid(user_input)
     else
-      array
+      @@array
     end
   end
+  
 end

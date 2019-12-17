@@ -20,9 +20,10 @@ class WeatherCli::CLI
       exit
     else
     # Uses the API class method get_woeid and passes the users input as an arguement
-      
+      WeatherCli::Forecast.find_or_create_by_city_name(name)
       check_response
       more_info
+      
       puts "Would you like to search for another city? "
       input = gets.strip.downcase
     while input != "exit"
@@ -54,7 +55,7 @@ end
       start
     else
       puts ""
-      print_weather
+      print_weather_array
       puts ""
     end
   end
@@ -77,15 +78,19 @@ end
   end
   
   
-
-  
-  
   def print_weather
     WeatherCli::Forecast.all.each.with_index(0) do |weather, index|
       puts "#{index + 1}. #{weather.date}."
     end
   end
   
+   def print_weather_array
+    WeatherCli::Forecast.array.each.with_index(0) do |weather, index|
+      puts "#{index + 1}. #{weather.date}."
+      puts "#{((weather.max_temp * 9/5) + 32).round()} °F"
+    end
+  end
+   
   
   def print_weather_day(day)
     #Prints the variables from the Forecast class
