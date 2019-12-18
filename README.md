@@ -1,8 +1,6 @@
 # WeatherCli
 This program uses an api to get weather data from a website.The program propmts the user to type in a major city name and gives the user a list of 6 days. The the user then chooses one of the six days to get a detailed weather report.
 
-TODO: Delete this and the text above, and describe your gem
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -23,7 +21,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+change to the weather_cli folder using the follwing command
+
+cd weather_cli
+
+Type the below and follow the on screen prompts.
+
+bin/weather_cli
 
 ## Development
 

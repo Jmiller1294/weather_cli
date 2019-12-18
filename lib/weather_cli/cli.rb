@@ -14,10 +14,10 @@ class WeatherCli::CLI
   def start
     puts "Type in a city to get its 6 day forecast:"
     input = gets.strip
-    while input != "exit"
-      WeatherCli::Forecast.find_or_create_by_city_name(input)
-      check_response
-      check_array
+    WeatherCli::Forecast.find_or_create_by_city_name(input)
+    check_response
+    check_array
+    while input !"exit"
       if input  == "exit"
         exit
       else
