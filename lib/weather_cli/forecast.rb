@@ -30,7 +30,11 @@ class WeatherCli::Forecast
   end 
   
   def self.find(id)
-    self.all[id-1]
+    self.all.last(6)[id-1]
+  end
+  
+  def self.find_from_array(index)
+    self.all[index -1]
   end
   
   def self.clear_all
@@ -39,10 +43,9 @@ class WeatherCli::Forecast
 
   def self.find_by_city_name(name)
     @@all.select do |weather|
-     if weather.name == name
-      weather
-     end
-     @@all
+      if weather.name.downcase == name.downcase
+        weather
+      end
   end
   end
   
@@ -50,7 +53,7 @@ class WeatherCli::Forecast
   def self.find_or_create_by_city_name(user_input)
     @@array = self.find_by_city_name(user_input)
     if @@array.empty?
-    WeatherCli::API.get_woeid(user_input)
+      WeatherCli::API.get_woeid(user_input)
     else
       @@array
     end
