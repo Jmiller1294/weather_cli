@@ -12,50 +12,46 @@ class WeatherCli::CLI
   
   
   def start
-    #gets input from the user
-      puts "Type in a city to get its 6 day forecast:"
-       input = gets.strip
-       while input != "exit"
-   WeatherCli::Forecast.find_or_create_by_city_name(input)
-   check_response
-    if input  == "exit"
-      exit
-    else
-      
-      
-      
-      puts "Would you like to search for another city? "
-      input = gets.strip.downcase
-    
-    if input == "exit"
-      exit
-    else
-      if input == 'y' || input == "yes"
-        start 
-         
-   
-      elsif input == "n" || input == "no"
-        puts ""
-        puts  "See you next time for more weather updates, Goodbye!"
+    puts "Type in a city to get its 6 day forecast:"
+    input = gets.strip
+    while input != "exit"
+      WeatherCli::Forecast.find_or_create_by_city_name(input)
+      check_response
+      check_array
+      if input  == "exit"
         exit
       else
-        puts ""
-        puts "Invalid answer. Enter Yes or No."
-        start
-        
-      end 
+        puts "Would you like to search for another city? "
+        input = gets.strip.downcase
+        if input == "exit"
+          exit
+        else
+          if input == 'y' || input == "yes"
+            start 
+          elsif input == "n" || input == "no"
+            puts ""
+            puts  "See you next time for more weather updates, Goodbye!"
+            exit
+          else
+            puts ""
+            puts "Invalid answer. Enter Yes or No."
+            start
+          end 
+        end
+      end
     end
-    end
-end
-end
+  end
   
   
   def check_response
     if WeatherCli::API.no_response == true
       puts "Sorry the app cant find that city"
       start
-    else
-      if WeatherCli::Forecast.array.empty?
+    end
+  end
+
+  def check_array
+    if WeatherCli::Forecast.array.empty?
       puts ""
       print_weather
       more_info
@@ -67,8 +63,8 @@ end
       puts ""
     end
   end
-  end
-
+  
+  
   
   def more_info
     puts ""
@@ -103,14 +99,13 @@ end
     end
   end
   
-  
-  
-  
+
   def print_weather
     WeatherCli::Forecast.all.last(6).each.with_index(0) do |weather, index|
       puts "#{index + 1}. #{weather.date}."
     end
   end
+  
   
   def print_weather_array
     WeatherCli::Forecast.array.each.with_index(0) do |weather, index|

@@ -7,7 +7,7 @@ class WeatherCli::Forecast
   
   @@all = []
   @@array = []
-  #instantiates each object with the following attributes
+
   def initialize(name, date ,weather_state_name, current_temp, max_temp, min_temp, wind_speed, humidity)
     @name = name
     @date = date
@@ -20,7 +20,7 @@ class WeatherCli::Forecast
     @@all << self
   end
   
-  #Stores all instances of class
+
   def self.all
     @@all
   end
@@ -34,7 +34,7 @@ class WeatherCli::Forecast
   end
   
   def self.find_from_array(index)
-    self.all[index -1]
+    self.array[index -1]
   end
   
   def self.clear_all
@@ -46,7 +46,7 @@ class WeatherCli::Forecast
       if weather.name.downcase == name.downcase
         weather
       end
-  end
+    end
   end
   
   
