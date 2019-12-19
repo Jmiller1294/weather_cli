@@ -1,6 +1,6 @@
 class WeatherCli::CLI
   
-  attr_accessor :name
+  
   
   #method used to start the program
   def call 
@@ -12,22 +12,23 @@ class WeatherCli::CLI
   
   
   def start
+    input = ""
+    while input !="exit"
     puts "Type in a city to get its 6 day forecast:"
     input = gets.strip
     WeatherCli::Forecast.find_or_create_by_city_name(input)
     check_response
     check_array
-    while input !"exit"
-      if input  == "exit"
-        exit
+    if input  == "exit"
+        puts "Goodbye!"
       else
         puts "Would you like to search for another city? "
         input = gets.strip.downcase
         if input == "exit"
-          exit
+          puts "Goodbye!"
         else
           if input == 'y' || input == "yes"
-            start 
+            puts "Ok" 
           elsif input == "n" || input == "no"
             puts ""
             puts  "See you next time for more weather updates, Goodbye!"
@@ -35,7 +36,6 @@ class WeatherCli::CLI
           else
             puts ""
             puts "Invalid answer. Enter Yes or No."
-            start
           end 
         end
       end

@@ -1,6 +1,6 @@
 class WeatherCli::API
   
-  attr_accessor :no_response , :name
+  attr_accessor :no_response 
   
   ROOT_URL = 'https://www.metaweather.com/api/location/'
   
@@ -8,9 +8,7 @@ class WeatherCli::API
     @@no_response 
   end
   
-  def self.name
-    @@name
-  end
+
   
   def self.get_woeid(user_city)
     #sample url: https://www.metaweather.com/api/location/search/?query=chicago
@@ -18,18 +16,18 @@ class WeatherCli::API
     response = HTTParty.get(ROOT_URL + "search/?query=#{user_city}")
     # resp = HTTParty.get("https://www.metaweather.com/api/location/search/?query=#{user_city}")
     # response[0]['woeid'] #=> returns 2379574, from hash "woeid"=>2379574"
-    @@name = response[0]['title']
+    name = response[0]['title']
     
     @@no_response = false
     if response.empty?
       @@no_response = true
     else
-      self.get_forecast_for_city(response[0]['woeid'])
+      self.get_forecast_for_city(response[0]['woeid'], name)
     end
   end
   
   
-  def self.create_from_array(response)
+  def self.create_from_array(response, name)
     #Creates an array form hash response 
     response["consolidated_weather"].each do |weather|
       date = weather["applicable_date"]
@@ -39,20 +37,19 @@ class WeatherCli::API
       min_temp = weather["min_temp"]
       wind_speed = weather["wind_speed"]
       humidity = weather["humidity"]
-      name = @@name
       #Creates a new WeatherCli::Forecast object 
       WeatherCli::Forecast.new(name, date, weather_state_name, current_temp, max_temp, min_temp, wind_speed, humidity)
     end
   end
        
   
-  def self.get_forecast_for_city(site_id)
+  def self.get_forecast_for_city(site_id, name)
     # sample url: https://www.metaweather.com/api/location/2379574/
     response = HTTParty.get(ROOT_URL + site_id.to_s)
     # resp = HTTParty.get("https://www.metaweather.com/api/location/#{site_id}")
 
     #uses the class method create_from_array 
-    self.create_from_array(response)
+    self.create_from_array(response, name)
   end
 
 end
