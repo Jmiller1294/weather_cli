@@ -48,6 +48,7 @@ class WeatherCli::CLI
     while input !="exit"
       puts "Type in a city to get its 6 day forecast:"
       input = gets.strip
+      puts""
     
       if input  == "exit"
         puts "Goodbye!"

@@ -16,9 +16,10 @@ class WeatherCli::API
     name = response[0]['title']
     
     @@no_response = false
-    if response.empty?
+    if response == nil 
       @@no_response = true
     else
+      name = response[0]['title']
       self.get_forecast_for_city(response[0]['woeid'], name)
     end
   end
