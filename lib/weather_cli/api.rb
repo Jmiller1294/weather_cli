@@ -13,10 +13,10 @@ class WeatherCli::API
     response = HTTParty.get(ROOT_URL + "search/?query=#{user_city}")
     # resp = HTTParty.get("https://www.metaweather.com/api/location/search/?query=#{user_city}")
     # response[0]['woeid'] #=> returns 2379574, from hash "woeid"=>2379574"
-    name = response[0]['title']
+    name = nil
     
     @@no_response = false
-    if response == nil 
+    if response.empty? 
       @@no_response = true
     else
       name = response[0]['title']

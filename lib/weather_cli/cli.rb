@@ -1,40 +1,9 @@
 class WeatherCli::CLI
   
-  # @@sample_data = [
-  #   [-7.1899999999999995, "2019-12-19",54,-4.92,-10.965,"Boston","Clear",11.205149853821682],
-  #   [-3.9000000000000004,"2019-12-20",60,-1.7,-8.04,"Boston","Clear",7.707110488756331],
-  #   [-1.9,"2019-12-21",66,0.02999999999999997,-6.88,"Boston","Heavy Cloud",2.4374862894641955],
-# #<WeatherCli::Forecast:0x00000000027004c0
-#   @current_temp=3.23,
-#   @date="2019-12-22",
-#   @humidity=67,
-#   @max_temp=4.615,
-#   @min_temp=-3.25,
-#   @name="Boston",
-#   @weather_state_name="Light Cloud",
-#   @wind_speed=5.698280536599593>,
-# #<WeatherCli::Forecast:0x0000000002700498
-#   @current_temp=5.52,
-#   @date="2019-12-23",
-#   @humidity=70,
-#   @max_temp=5.824999999999999,
-#   @min_temp=-0.5750000000000001,
-#   @name="Boston",
-#   @weather_state_name="Clear",
-#   @wind_speed=5.5608009339192455>,
-# #<WeatherCli::Forecast:0x0000000002700448
-#   @current_temp=3.08,
-#   @date="2019-12-24",
-#   @humidity=83,
-#   @max_temp=5.62,
-#   @min_temp=-0.09000000000000001,
-#   @name="Boston",
-#   @weather_state_name="Heavy Cloud",
-#   @wind_speed=5.303282828282828>]
+ 
   
   #method used to start the program
   def call 
-    #@@sample_data.each {|arr|  WeatherCli::Forecast.new(arr[5], arr[1] ,arr[6], arr[0], arr[3], arr[4], arr[7], arr[2])}
    puts "---------------------------------------"
    puts " Hello, Welcome to the City Weather App "
    puts "---------------------------------------"
@@ -44,7 +13,6 @@ class WeatherCli::CLI
   
   def start
     input = ""
-    
     while input !="exit"
       puts "Type in a city to get its 6 day forecast:"
       input = gets.strip
