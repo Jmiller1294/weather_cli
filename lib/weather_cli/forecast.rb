@@ -1,13 +1,12 @@
 class WeatherCli::Forecast
 
-  require 'pry'
   
   #creates setter and getter methods
-  attr_accessor :id, :name , :date, :weather_state_name ,:current_temp , :min_temp, :max_temp,:wind_speed, :humidity 
+  attr_accessor :id, :name , :date, :weather_state_name ,:current_temp , :min_temp, :max_temp, :wind_speed, :humidity 
+  
   @@all = []
  
   
-
   def initialize(name, date ,weather_state_name, current_temp, max_temp, min_temp, wind_speed, humidity)
     @name = name
     @date = date
@@ -24,20 +23,7 @@ class WeatherCli::Forecast
   def self.all
     @@all
   end
-  
-  def self.array
-    @@array
-  end 
-  
-  def self.find_object(obj)
-    binding.pry
-    #find the obj from @@all 
-    [id-1]
-  end
-  
-  def self.find_from_array(index)
-    self.array[index -1]
-  end
+
 
   def self.find_by_city_name(name)
     @@all.select do |weather|

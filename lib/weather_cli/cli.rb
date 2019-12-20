@@ -38,43 +38,52 @@ class WeatherCli::CLI
    puts "---------------------------------------"
    puts " Hello, Welcome to the City Weather App "
    puts "---------------------------------------"
-   #binding.pry
    start
   end
   
   
   def start
     input = ""
-    while input !="exit"
-    puts "Type in a city to get its 6 day forecast:"
-    input = gets.strip
     
-    if input  == "exit"
-        puts "Goodbye"
+    while input !="exit"
+      puts "Type in a city to get its 6 day forecast:"
+      input = gets.strip
+    
+      if input  == "exit"
+        puts "Goodbye!"
       else
         forecast_array = WeatherCli::Forecast.find_or_create_by_city_name(input)
         check_response
         print_weather_list(forecast_array)
         more_info(forecast_array)
+      
         puts "Would you like to search for another city? "
         input = gets.strip.downcase
-        if input == "exit"
-          puts "Goodbye!"
-        elsif input == 'y' || input == "yes"
-            puts "Ok" 
-          elsif input == "n" || input == "no"
+      
+        case input 
+          when "exit"
+            puts "Goodbye!"
+          when "no"
             puts ""
             puts  "See you next time for more weather updates, Goodbye!"
             exit
+          when "n" 
+            puts ""
+            puts  "See you next time for more weather updates, Goodbye!"
+            exit
+          when "yes"
+            puts "Ok" 
+          when 'y'
+            puts "Ok" 
           else
             puts ""
             puts "Invalid answer. Enter Yes or No."
-          end 
+            start
         end
-      end
+      end 
     end
-  
-  
+  end
+
   
   def check_response
     if WeatherCli::API.no_response == true
@@ -83,13 +92,12 @@ class WeatherCli::CLI
     end
   end
 
+
   def print_weather_list(forecast_array)
     forecast_array.each.with_index(0) do |weather, index|
       puts "#{index + 1}. #{weather.date}."
     end
   end
-  
-  
   
   
   def more_info(forecast_array)
@@ -100,10 +108,7 @@ class WeatherCli::CLI
       exit
     else
       if input.to_i >= 1 && input.to_i <= 6
-        #binding.pry
         day = forecast_array[input.to_i-1]
-        # pass in WHOLE object FROM LIST
-        # day = WeatherCli::Forecast.find_object(OBJECT)
         print_weather_day(day)
       else
         puts "Wrong number entered, please enter number 1-6"
@@ -112,32 +117,7 @@ class WeatherCli::CLI
     end
   end
   
-  def more_info_from_array
-    puts "Type in 1-6 to get a detailed report for one these dates"
-    input = gets.strip.downcase
-    if input == "exit"
-      exit
-    else
-      if input.to_i >= 1 && input.to_i <= 6
-        day = WeatherCli::Forecast.find_from_array(input.to_i)
-        print_weather_day(day)
-      else
-        puts "Wrong number entered, please enter number 1-6"
-        more_info_from_array
-      end
-    end
-  end
-  
 
-  
-  
-  def print_weather_array
-    WeatherCli::Forecast.array.each.with_index(0) do |weather, index|
-      puts "#{index + 1}. #{weather.date}."
-    end
-  end
-   
-  
   def print_weather_day(day)
     #Prints the variables from the Forecast class
     puts ""

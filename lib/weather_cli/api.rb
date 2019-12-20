@@ -1,14 +1,11 @@
 class WeatherCli::API
   
-  attr_accessor :no_response 
-  
   ROOT_URL = 'https://www.metaweather.com/api/location/'
   
   def self.no_response
     @@no_response 
   end
   
-
   
   def self.get_woeid(user_city)
     #sample url: https://www.metaweather.com/api/location/search/?query=chicago
